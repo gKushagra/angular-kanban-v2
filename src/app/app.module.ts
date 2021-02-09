@@ -18,10 +18,8 @@ import { ComponentsModule } from "./components/component.module";
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule,
-    FlexLayoutModule,
-    HttpClientModule,
-    ReactiveFormsModule,
+    MaterialModule, // remove if not needed in app component
+    FlexLayoutModule, // remove if not needed in app component
     ComponentsModule
   ],
   providers: [],

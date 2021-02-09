@@ -10,7 +10,7 @@ ReactiveForms
 BrowserAnimations  
 
 Note: The `/components` directory inside the `/app` is where all the components go.  
-Declare and export the components in `components.module.ts`. 
+Declare and export the components in `components.module.ts`. Import any required modules in it.
 
 Stylesheet is set to SCSS, font-family is Roboto and Theme is Indigo-Pink.
 
