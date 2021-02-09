@@ -9,7 +9,10 @@ HttpClient
 ReactiveForms  
 BrowserAnimations  
 
-Stylesheet is set to SCSS.
+The `/components` directory inside the `/app` is where all the components go.  
+Declare and export the modules in `components.module.ts`. 
+
+Stylesheet is set to SCSS, font-family is Roboto and Theme is Indigo-Pink.
 
 Angular Version 10.0.5
 
@@ -18,4 +21,6 @@ Angular Version 10.0.5
 Clone the repository
 
 `npm install`
+
+`ng serve`
 

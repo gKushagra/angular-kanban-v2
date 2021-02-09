@@ -8,6 +8,7 @@ import { MaterialModule } from './material.module';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ComponentsModule } from "./components/component.module";
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     FlexLayoutModule,
     HttpClientModule,
     ReactiveFormsModule,
+    ComponentsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
