@@ -5,6 +5,8 @@ This boilerplate code includes Material, Routing, and Flex Layout modules. Style
 Angular Version 10.0.5
 
 ## To get started
+
 Clone the repository
-npm install
+
+`npm install`
 
