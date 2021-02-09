@@ -9,8 +9,8 @@ HttpClient
 ReactiveForms  
 BrowserAnimations  
 
-The `/components` directory inside the `/app` is where all the components go.  
-Declare and export the modules in `components.module.ts`. 
+Note: The `/components` directory inside the `/app` is where all the components go.  
+Declare and export the components in `components.module.ts`. 
 
 Stylesheet is set to SCSS, font-family is Roboto and Theme is Indigo-Pink.
 
