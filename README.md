@@ -2,18 +2,18 @@
 
 This boilerplate code includes these modules: 
 
-Material
-AppRouting
-FlexLayout
-HttpClient
-ReactiveForms
-BrowserAnimations
+Material  
+AppRouting  
+FlexLayout  
+HttpClient  
+ReactiveForms  
+BrowserAnimations  
 
 Stylesheet is set to SCSS.
 
 Angular Version 10.0.5
 
-## To get started
+## Get Started
 
 Clone the repository
 
