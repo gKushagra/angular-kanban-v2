@@ -1,22 +1,11 @@
-# Angular Starter Code
+# Kanban App
 
-This boilerplate code includes these modules: 
+Use this app for personal use to organize you daily work. You can save your boards to local storage.
+A basic use case of this app is to keep a track of your daily work. This tool is not ideal if you want to save the history of your boards.
 
-Material  
-AppRouting  
-FlexLayout  
-HttpClient  
-ReactiveForms  
-BrowserAnimations  
+Note: This tool is based of adityakeyal/angular-kanban.
 
-Note: The `/components` directory inside the `/app` is where all the components go.  
-Declare and export the components in `components.module.ts`. Import any required modules in it.
-
-Stylesheet is set to SCSS, font-family is Roboto and Theme is Indigo-Pink.
-
-Angular Version 10.0.5
-
-## Get Started
+## Usage
 
 Clone the repository
 
