@@ -1,16 +1,16 @@
+import { FormControl } from "@angular/forms";
+
 export interface CardInterface {
     id: string;
-    header: string;
-    summary: string;
-    description: string;
+    header: FormControl;
+    description: FormControl;
 }
 
 export class Card implements CardInterface {
 
     constructor(
         public id: string,
-        public header: string,
-        public summary: string,
-        public description: string
+        public header: FormControl,
+        public description: FormControl
     ) { }
 }

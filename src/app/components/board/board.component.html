@@ -1,21 +1,235 @@
-<div fxLayout="column" style="width: 100%; height: 100%;">
-    <!-- row with save btn -->
-    <div fxLayout="row" fxLayoutAlign="start center" style="width: 100%; margin-top: 16px;">
+<div fxLayout="column" fxLayoutAlign="start center" style="width: 100%; height: 100%;">
+    <!-- save btn -->
+    <div fxLayout="row" style="width:90%;">
         <div fxFlex></div>
-        <div>
+        <div style="margin-top: 16px;">
             <button color="primary" mat-flat-button>Save</button>
         </div>
-        <div fxFlex="2"></div>
     </div>
-    <!-- boards -->
-    <div fxLayout="row" fxLayoutAlign="start center" style="width: 100%;">
-        <app-list *ngFor="let list of lists; let i = index" [list]="list" [listIndex]="i"
-            (moveCardAcrossList)="moveCardAcrossList($event)" (deleteList)="deleteList($event)" attr.listIndex="{{i}}">
-        </app-list>
-        <div fxFlex="5"></div>
-        <!-- add new board -->
-        <div>
-            <button (click)="addList()" mat-button>Add New Board</button>
+    <div fxLayout="row wrap" cdkDropListGroup style="width: 100%; margin-top: 32px;">
+        <!-- to do -->
+        <div style="width: 20%; margin: 0 2% 0 2%;">
+            <div fxLayout="row" style="width: 100%;">
+                <div fxFlex="2"></div>
+                <div class="mat-headline">To Do</div>
+                <div fxFlex></div>
+            </div>
+            <div fxLayout="column" style="width: 100%;">
+                <div class="example-list" cdkDropList [cdkDropListData]="toDoCards" cdkDropListSortingDisabled
+                    (cdkDropListDropped)="drop($event)">
+                    <mat-card *ngFor="let card of toDoCards; let i = index;" style="margin: 12px 0 12px 0;" cdkDrag>
+                        <div fxLayout="column" style="width: 100%;">
+                            <div fxLayout="row" style="width: 100%;">
+                                <mat-form-field appearance="none" fxFlex>
+                                    <input placeholder="Title..." style="font-size: 18px !important;"
+                                        [formControl]="card.header" type="text" matInput />
+                                </mat-form-field>
+                                <div>
+                                    <button matTooltip="Remove" (click)="deleteCard(1,i)" mat-icon-button>
+                                        <mat-icon>remove_circle</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                            <mat-form-field appearance="none" style="width: 100%;">
+                                <textarea placeholder="Description..." style="font-size: 16px !important;"
+                                    [formControl]="card.description" matInput></textarea>
+                            </mat-form-field>
+                        </div>
+                    </mat-card>
+                </div>
+                <div fxLayout="row" style="width: 100%;">
+                    <div fxFlex></div>
+                    <div>
+                        <button matTooltip="Add" (click)="addNewCard(1)" mat-icon-button>
+                            <mat-icon>add_circle_outline</mat-icon>
+                        </button>
+                    </div>
+                    <div fxFlex="2"></div>
+                </div>
+            </div>
+        </div>
+        <!-- in progress -->
+        <div style="width: 20%; margin: 0 2% 0 2%;">
+            <div fxLayout="row" style="width: 100%;">
+                <div fxFlex="2"></div>
+                <div class="mat-headline">In Progress</div>
+                <div fxFlex></div>
+            </div>
+            <div fxLayout="column" style="width: 100%;">
+                <div class="example-list" cdkDropList [cdkDropListData]="inProgressCards" cdkDropListSortingDisabled
+                    (cdkDropListDropped)="drop($event)">
+                    <mat-card *ngFor="let card of inProgressCards; let i = index" style="margin: 12px 0 12px 0;"
+                        cdkDrag>
+                        <div fxLayout="column" style="width: 100%;">
+                            <div fxLayout="row" style="width: 100%;">
+                                <mat-form-field appearance="none" fxFlex>
+                                    <input placeholder="Title..." style="font-size: 18px !important;"
+                                        [formControl]="card.header" type="text" matInput />
+                                </mat-form-field>
+                                <div>
+                                    <button matTooltip="Remove" (click)="deleteCard(2,i)" mat-icon-button>
+                                        <mat-icon>remove_circle</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                            <mat-form-field appearance="none" style="width: 100%;">
+                                <textarea placeholder="Description..." style="font-size: 16px !important;"
+                                    [formControl]="card.description" matInput></textarea>
+                            </mat-form-field>
+                        </div>
+                    </mat-card>
+                </div>
+                <div fxLayout="row" style="width: 100%;">
+                    <div fxFlex></div>
+                    <div>
+                        <button matTooltip="Add" (click)="addNewCard(2)" mat-icon-button>
+                            <mat-icon>add_circle_outline</mat-icon>
+                        </button>
+                    </div>
+                    <div fxFlex="2"></div>
+                </div>
+            </div>
+        </div>
+        <!-- ready for review -->
+        <div style="width: 20%; margin: 0 2% 0 2%;">
+            <div fxLayout="row" style="width: 100%;">
+                <div fxFlex="2"></div>
+                <div class="mat-headline">Ready for Review</div>
+                <div fxFlex></div>
+            </div>
+            <div fxLayout="column" style="width: 100%;">
+                <div class="example-list" cdkDropList [cdkDropListData]="readyForReviewCards" cdkDropListSortingDisabled
+                    (cdkDropListDropped)="drop($event)">
+                    <mat-card *ngFor="let card of readyForReviewCards; let i = index" style="margin: 12px 0 12px 0;"
+                        cdkDrag>
+                        <div fxLayout="column" style="width: 100%;">
+                            <div fxLayout="row" style="width: 100%;">
+                                <mat-form-field appearance="none" fxFlex>
+                                    <input placeholder="Title..." style="font-size: 18px !important;"
+                                        [formControl]="card.header" type="text" matInput />
+                                </mat-form-field>
+                                <div>
+                                    <button matTooltip="Remove" (click)="deleteCard(3,i)" mat-icon-button>
+                                        <mat-icon>remove_circle</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                            <mat-form-field appearance="none" style="width: 100%;">
+                                <textarea placeholder="Description..." style="font-size: 16px !important;"
+                                    [formControl]="card.description" matInput></textarea>
+                            </mat-form-field>
+                        </div>
+                    </mat-card>
+                </div>
+                <div fxLayout="row" style="width: 100%;">
+                    <div fxFlex></div>
+                    <div>
+                        <button matTooltip="Add" (click)="addNewCard(3)" mat-icon-button>
+                            <mat-icon>add_circle_outline</mat-icon>
+                        </button>
+                    </div>
+                    <div fxFlex="2"></div>
+                </div>
+            </div>
+        </div>
+        <!-- complete -->
+        <div style="width: 20%; margin: 0 2% 0 2%;">
+            <div fxLayout="row" style="width: 100%;">
+                <div fxFlex="2"></div>
+                <div class="mat-headline">Complete</div>
+                <div fxFlex></div>
+            </div>
+            <div fxLayout="column" style="width: 100%;">
+                <div class="example-list" cdkDropList [cdkDropListData]="completeCards" cdkDropListSortingDisabled
+                    (cdkDropListDropped)="drop($event)">
+                    <mat-card *ngFor="let card of completeCards; let i = index" style="margin: 12px 0 12px 0;" cdkDrag>
+                        <div fxLayout="column" style="width: 100%;">
+                            <div fxLayout="row" style="width: 100%;">
+                                <mat-form-field appearance="none" fxFlex>
+                                    <input placeholder="Title..." style="font-size: 18px !important;"
+                                        [formControl]="card.header" type="text" matInput />
+                                </mat-form-field>
+                                <div>
+                                    <button matTooltip="Remove" (click)="deleteCard(4,i)" mat-icon-button>
+                                        <mat-icon>remove_circle</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                            <mat-form-field appearance="none" style="width: 100%;">
+                                <textarea placeholder="Description..." style="font-size: 16px !important;"
+                                    [formControl]="card.description" matInput></textarea>
+                            </mat-form-field>
+                        </div>
+                    </mat-card>
+                </div>
+                <div fxLayout="row" style="width: 100%;">
+                    <div fxFlex></div>
+                    <div>
+                        <button matTooltip="Add" (click)="addNewCard(4)" mat-icon-button>
+                            <mat-icon>add_circle_outline</mat-icon>
+                        </button>
+                    </div>
+                    <div fxFlex="2"></div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+<!-- use the below code to build drag and drop with dynamic board adding -->
+<!-- <div *ngIf="!refreshBoardsView" fxLayout="row wrap" style="width: 90%; margin-top: 32px;">
+    <mat-card *ngFor="let board of boards; let i = index" style="width: 20%; margin: 0 0 0 2%;">
+        <div fxLayout="row" style="width: 100%;">
+            <div fxFlex="2"></div>
+            <mat-form-field appearance="none" fxFlex>
+                <input placeholder="Board Name..." style="font-size: 21px !important;"
+                    [formControl]="boardNameControl[i]" type="text" matInput />
+            </mat-form-field>
+            <div fxFlex="5"></div>
+            <div>
+                <button matTooltip="Delete Board" (click)="deleteBoard(i)" mat-icon-button>
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+        </div>
+        <div fxLayout="column" style="width: 100%;">
+            <div cdkDropListGroup>
+                <div cdkDropList [cdkDropListData]="board.cards" cdkDropListSortingDisabled
+                    (cdkDropListDropped)="drop($event)">
+                    <mat-card *ngFor="let card of board.cards; let j = index" cdkDrag>
+                        <div fxLayout="column" style="width: 100%;">
+                            <div fxLayout="row" style="width: 100%;">
+                                <div fxFlex="2"></div>
+                                <mat-form-field appearance="none" fxFlex>
+                                    <input placeholder="Title..." style="font-size: 18px !important;"
+                                        [formControl]="cardContentControl[i][j].header" type="text" matInput />
+                                </mat-form-field>
+                                <div>
+                                    <button (click)="deleteCard(i, j)" mat-icon-button>
+                                        <mat-icon>remove_circle</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                            <mat-form-field appearance="none" style="width: 100%;">
+                                <textarea placeholder="Description..." style="font-size: 16px !important;"
+                                    [formControl]="cardContentControl[i][j].description" matInput></textarea>
+                            </mat-form-field>
+                        </div>
+                    </mat-card>
+                </div>
+            </div>
+            <div fxLayout="row" style="width: 100%;">
+                <div fxFlex></div>
+                <div>
+                    <button (click)="addNewCard(i)" mat-icon-button>
+                        <mat-icon>add_circle_outline</mat-icon>
+                    </button>
+                </div>
+                <div fxFlex="2"></div>
+            </div>
+        </div>
+    </mat-card>
+    <div>
+        <button *ngIf="!disableAddBoardButton" (click)="addBoard()" mat-button>Add New Board</button>
+    </div>
+</div> -->

@@ -1,16 +1,16 @@
-import { ListInterface } from "./list.model";
+import { CardInterface } from "./card.model";
 
 export interface BoardInterface {
     id: string;
     name: string;
-    lists: ListInterface[];
+    cards: CardInterface[]
 }
 
 export class BoardModel implements BoardInterface {
 
-    id: string;
-    name: string;
-    lists: ListInterface[];
-
-    constructor() { }
+    constructor(
+        public id: string,
+        public name: string,
+        public cards: CardInterface[]
+    ) { }
 }
