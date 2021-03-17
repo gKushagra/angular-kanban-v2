@@ -1,0 +1,39 @@
+<div fxLayout="column">
+    <!-- delete board -->
+    <div>
+        <button (click)="delete()" mat-icon-button>
+            <mat-icon>delete</mat-icon>
+        </button>
+    </div>
+    <!-- board name -->
+    <div>
+        <mat-form-field>
+            <input type="text" (change)="updateListName($event)" [formControl]="listName" matInput />
+        </mat-form-field>
+    </div>
+    <!-- cards -->
+    <div>
+        <app-card *ngFor="let card of list.cards; let i = index;" [card]="card" [listIndex]="listIndex" [cardIndex]="i"
+            attr.cardIndex="{{ i }}"></app-card>
+    </div>
+    <!-- add card -->
+    <div fxLayout="row" fxLayoutAlign="start center">
+        <div fxFlex></div>
+        <div>
+            <button (click)="addNewCard()" mat-icon-button>
+                <mat-icon>add_circle_outline</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="list col custom-col list-drag-component" (dragover)="allowCardReplacement($event)" (drop)="dropCard($event)"
+    id="list-{{listIndex}}">
+    <app-context-menu (contextAction)="delete()"></app-context-menu>
+    <p class="list-name" [(appContentEdit)]="list.name"></p>
+    <div id="list-one">
+        <app-card-summary *ngFor="let card of this.list.cards;let i = index" [card]="card" [listIndex]="listIndex"
+            [cardIndex]="i" attr.cardIndex="{{i}}"></app-card-summary>
+    </div>
+    <h6 class="text-center add-new-card" (click)="addNewCard()">Add new card...</h6>
+</div> -->

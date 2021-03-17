@@ -1,0 +1,21 @@
+<div fxLayout="column" style="width: 100%; height: 100%;">
+    <!-- row with save btn -->
+    <div fxLayout="row" fxLayoutAlign="start center" style="width: 100%; margin-top: 16px;">
+        <div fxFlex></div>
+        <div>
+            <button color="primary" mat-flat-button>Save</button>
+        </div>
+        <div fxFlex="2"></div>
+    </div>
+    <!-- boards -->
+    <div fxLayout="row" fxLayoutAlign="start center" style="width: 100%;">
+        <app-list *ngFor="let list of lists; let i = index" [list]="list" [listIndex]="i"
+            (moveCardAcrossList)="moveCardAcrossList($event)" (deleteList)="deleteList($event)" attr.listIndex="{{i}}">
+        </app-list>
+        <div fxFlex="5"></div>
+        <!-- add new board -->
+        <div>
+            <button (click)="addList()" mat-button>Add New Board</button>
+        </div>
+    </div>
+</div>
