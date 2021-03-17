@@ -2,10 +2,11 @@
     <!-- save btn, saving spinner, etc -->
     <div fxLayout="row" style="width:100%; margin-top: 16px;">
         <div fxFlex="2"></div>
-        <div class="mat-title">Daily Kanban</div>
+        <div class="mat-headline">Daily Kanban</div>
         <div fxFlex></div>
         <div>
-            <mat-progress-spinner *ngIf="savingBoards" color="primary" diameter="20" mode="indeterminate"></mat-progress-spinner>
+            <mat-progress-spinner *ngIf="savingBoards" color="primary" diameter="20" mode="indeterminate">
+            </mat-progress-spinner>
         </div>
         <div fxFlex="1"></div>
         <div class="mat-body-1" *ngIf="savingBoards">Saving...</div>
@@ -15,12 +16,12 @@
         <div fxFlex="2"></div>
     </div>
     <mat-divider style="width:100%;"></mat-divider>
-    <div fxLayout="row wrap" cdkDropListGroup style="width: 100%; margin-top: 32px;">
+    <div fxLayout="row wrap" cdkDropListGroup style="width: 100%; margin-top: 16px;">
         <!-- to do -->
         <div style="width: 20%; margin: 0 2% 0 2%;">
             <div fxLayout="row" style="width: 100%;">
                 <div fxFlex="2"></div>
-                <div class="mat-headline">To Do</div>
+                <div class="mat-title">To Do</div>
                 <div fxFlex></div>
             </div>
             <div fxLayout="column" style="width: 100%;">
@@ -28,32 +29,39 @@
                     (cdkDropListDropped)="drop($event)">
                     <mat-card *ngFor="let card of toDoCards; let i = index;" style="margin: 12px 0 12px 0;" cdkDrag>
                         <div fxLayout="column" style="width: 100%;">
-                            <div fxLayout="row" style="width: 100%;">
-                                <mat-form-field appearance="none" fxFlex>
-                                    <input (change)="saveState($event)" placeholder="Title..." style="font-size: 18px !important;"
-                                        [formControl]="card.header" type="text" matInput />
-                                </mat-form-field>
+                            <div fxLayout="row" fxLayoutAlign="start center" style="width: 100%;">
+                                <div class="mat-small">{{ card.id |date }}</div>
+                                <div fxFlex></div>
                                 <div>
-                                    <button matTooltip="Remove" (click)="deleteCard(1,i);saveState($event);" mat-icon-button>
+                                    <button matTooltip="Remove" (click)="deleteCard(1,i);saveState($event);"
+                                        mat-icon-button>
                                         <mat-icon>remove_circle</mat-icon>
                                     </button>
                                 </div>
                             </div>
-                            <mat-form-field appearance="none" style="width: 100%;">
-                                <textarea (change)="saveState($event)" placeholder="Description..." style="font-size: 16px !important;"
-                                    [formControl]="card.description" matInput></textarea>
+                            <mat-form-field appearance="none" fxFlex>
+                                <input (change)="saveState($event)" placeholder="Title..."
+                                    style="font-size: 18px !important;" [formControl]="card.header" type="text"
+                                    matInput />
                             </mat-form-field>
+                            <mat-form-field appearance="none" style="width: 100%;">
+                                <textarea (change)="saveState($event)" placeholder="Description..."
+                                    style="font-size: 16px !important;" [formControl]="card.description"
+                                    matInput></textarea>
+                            </mat-form-field>
+
                         </div>
                     </mat-card>
-                </div>
-                <div fxLayout="row" style="width: 100%;">
-                    <div fxFlex></div>
-                    <div>
-                        <button matTooltip="Add" (click)="addNewCard(1)" mat-icon-button>
-                            <mat-icon>add_circle_outline</mat-icon>
-                        </button>
+                    <!-- add new card -->
+                    <div fxLayout="row" style="width: 100%;" cdkDragDisabled=true>
+                        <div fxFlex></div>
+                        <div>
+                            <button matTooltip="Add" (click)="addNewCard(1)" mat-icon-button>
+                                <mat-icon>add_circle_outline</mat-icon>
+                            </button>
+                        </div>
+                        <div fxFlex="2"></div>
                     </div>
-                    <div fxFlex="2"></div>
                 </div>
             </div>
         </div>
@@ -61,7 +69,7 @@
         <div style="width: 20%; margin: 0 2% 0 2%;">
             <div fxLayout="row" style="width: 100%;">
                 <div fxFlex="2"></div>
-                <div class="mat-headline">In Progress</div>
+                <div class="mat-title">In Progress</div>
                 <div fxFlex></div>
             </div>
             <div fxLayout="column" style="width: 100%;">
@@ -70,32 +78,38 @@
                     <mat-card *ngFor="let card of inProgressCards; let i = index" style="margin: 12px 0 12px 0;"
                         cdkDrag>
                         <div fxLayout="column" style="width: 100%;">
-                            <div fxLayout="row" style="width: 100%;">
-                                <mat-form-field appearance="none" fxFlex>
-                                    <input (change)="saveState($event)" placeholder="Title..." style="font-size: 18px !important;"
-                                        [formControl]="card.header" type="text" matInput />
-                                </mat-form-field>
+                            <div fxLayout="row" fxLayoutAlign="start center" style="width: 100%;">
+                                <div class="mat-small">{{ card.id |date }}</div>
+                                <div fxFlex></div>
                                 <div>
-                                    <button matTooltip="Remove" (click)="deleteCard(2,i);saveState($event);" mat-icon-button>
+                                    <button matTooltip="Remove" (click)="deleteCard(2,i);saveState($event);"
+                                        mat-icon-button>
                                         <mat-icon>remove_circle</mat-icon>
                                     </button>
                                 </div>
                             </div>
+                            <mat-form-field appearance="none" fxFlex>
+                                <input (change)="saveState($event)" placeholder="Title..."
+                                    style="font-size: 18px !important;" [formControl]="card.header" type="text"
+                                    matInput />
+                            </mat-form-field>
                             <mat-form-field appearance="none" style="width: 100%;">
-                                <textarea (change)="saveState($event)" placeholder="Description..." style="font-size: 16px !important;"
-                                    [formControl]="card.description" matInput></textarea>
+                                <textarea (change)="saveState($event)" placeholder="Description..."
+                                    style="font-size: 16px !important;" [formControl]="card.description"
+                                    matInput></textarea>
                             </mat-form-field>
                         </div>
                     </mat-card>
-                </div>
-                <div fxLayout="row" style="width: 100%;">
-                    <div fxFlex></div>
-                    <div>
-                        <button matTooltip="Add" (click)="addNewCard(2)" mat-icon-button>
-                            <mat-icon>add_circle_outline</mat-icon>
-                        </button>
+                    <!-- add card -->
+                    <div fxLayout="row" style="width: 100%;" cdkDragDisabled=true>
+                        <div fxFlex></div>
+                        <div>
+                            <button matTooltip="Add" (click)="addNewCard(2)" mat-icon-button>
+                                <mat-icon>add_circle_outline</mat-icon>
+                            </button>
+                        </div>
+                        <div fxFlex="2"></div>
                     </div>
-                    <div fxFlex="2"></div>
                 </div>
             </div>
         </div>
@@ -103,7 +117,7 @@
         <div style="width: 20%; margin: 0 2% 0 2%;">
             <div fxLayout="row" style="width: 100%;">
                 <div fxFlex="2"></div>
-                <div class="mat-headline">Ready for Review</div>
+                <div class="mat-title">Ready for Review</div>
                 <div fxFlex></div>
             </div>
             <div fxLayout="column" style="width: 100%;">
@@ -112,73 +126,88 @@
                     <mat-card *ngFor="let card of readyForReviewCards; let i = index" style="margin: 12px 0 12px 0;"
                         cdkDrag>
                         <div fxLayout="column" style="width: 100%;">
-                            <div fxLayout="row" style="width: 100%;">
-                                <mat-form-field appearance="none" fxFlex>
-                                    <input (change)="saveState($event)" placeholder="Title..." style="font-size: 18px !important;"
-                                        [formControl]="card.header" type="text" matInput />
-                                </mat-form-field>
+                            <div fxLayout="row" fxLayoutAlign="start center" style="width: 100%;">
+                                <div class="mat-small">{{ card.id |date }}</div>
+                                <div fxFlex></div>
                                 <div>
-                                    <button matTooltip="Remove" (click)="deleteCard(3,i);saveState($event);" mat-icon-button>
+                                    <button matTooltip="Remove" (click)="deleteCard(3,i);saveState($event);"
+                                        mat-icon-button>
                                         <mat-icon>remove_circle</mat-icon>
                                     </button>
                                 </div>
                             </div>
-                            <mat-form-field appearance="none" style="width: 100%;">
-                                <textarea (change)="saveState($event)" placeholder="Description..." style="font-size: 16px !important;"
-                                    [formControl]="card.description" matInput></textarea>
+                            <mat-form-field appearance="none" fxFlex>
+                                <input (change)="saveState($event)" placeholder="Title..."
+                                    style="font-size: 18px !important;" [formControl]="card.header" type="text"
+                                    matInput />
                             </mat-form-field>
+                            <mat-form-field appearance="none" style="width: 100%;">
+                                <textarea (change)="saveState($event)" placeholder="Description..."
+                                    style="font-size: 16px !important;" [formControl]="card.description"
+                                    matInput></textarea>
+                            </mat-form-field>
+
                         </div>
                     </mat-card>
-                </div>
-                <div fxLayout="row" style="width: 100%;">
-                    <div fxFlex></div>
-                    <div>
-                        <button matTooltip="Add" (click)="addNewCard(3)" mat-icon-button>
-                            <mat-icon>add_circle_outline</mat-icon>
-                        </button>
+                    <!-- add new card -->
+                    <div fxLayout="row" style="width: 100%;" cdkDragDisabled=true>
+                        <div fxFlex></div>
+                        <div>
+                            <button matTooltip="Add" (click)="addNewCard(3)" mat-icon-button>
+                                <mat-icon>add_circle_outline</mat-icon>
+                            </button>
+                        </div>
+                        <div fxFlex="2"></div>
                     </div>
-                    <div fxFlex="2"></div>
                 </div>
+
             </div>
         </div>
         <!-- complete -->
         <div style="width: 20%; margin: 0 2% 0 2%;">
             <div fxLayout="row" style="width: 100%;">
                 <div fxFlex="2"></div>
-                <div class="mat-headline">Complete</div>
+                <div class="mat-title">Complete</div>
                 <div fxFlex></div>
             </div>
             <div fxLayout="column" style="width: 100%;">
                 <div class="example-list" cdkDropList [cdkDropListData]="completeCards" cdkDropListSortingDisabled
                     (cdkDropListDropped)="drop($event)">
+                    <!-- card -->
                     <mat-card *ngFor="let card of completeCards; let i = index" style="margin: 12px 0 12px 0;" cdkDrag>
                         <div fxLayout="column" style="width: 100%;">
-                            <div fxLayout="row" style="width: 100%;">
-                                <mat-form-field appearance="none" fxFlex>
-                                    <input (change)="saveState($event)" placeholder="Title..." style="font-size: 18px !important;"
-                                        [formControl]="card.header" type="text" matInput />
-                                </mat-form-field>
+                            <div fxLayout="row" fxLayoutAlign="start center" style="width: 100%;">
+                                <div class="mat-small">{{ card.id |date }}</div>
+                                <div fxFlex></div>
                                 <div>
-                                    <button matTooltip="Remove" (click)="deleteCard(4,i);saveState($event);" mat-icon-button>
+                                    <button matTooltip="Remove" (click)="deleteCard(4,i);saveState($event);"
+                                        mat-icon-button>
                                         <mat-icon>remove_circle</mat-icon>
                                     </button>
                                 </div>
                             </div>
+                            <mat-form-field appearance="none" fxFlex>
+                                <input (change)="saveState($event)" placeholder="Title..."
+                                    style="font-size: 18px !important;" [formControl]="card.header" type="text"
+                                    matInput />
+                            </mat-form-field>
                             <mat-form-field appearance="none" style="width: 100%;">
-                                <textarea (change)="saveState($event)" placeholder="Description..." style="font-size: 16px !important;"
-                                    [formControl]="card.description" matInput></textarea>
+                                <textarea (change)="saveState($event)" placeholder="Description..."
+                                    style="font-size: 16px !important;" [formControl]="card.description"
+                                    matInput></textarea>
                             </mat-form-field>
                         </div>
                     </mat-card>
-                </div>
-                <div fxLayout="row" style="width: 100%;">
-                    <div fxFlex></div>
-                    <div>
-                        <button matTooltip="Add" (click)="addNewCard(4)" mat-icon-button>
-                            <mat-icon>add_circle_outline</mat-icon>
-                        </button>
+                    <!-- add new card -->
+                    <div fxLayout="row" style="width: 100%;" cdkDragDisabled=true>
+                        <div fxFlex></div>
+                        <div>
+                            <button matTooltip="Add" (click)="addNewCard(4)" mat-icon-button>
+                                <mat-icon>add_circle_outline</mat-icon>
+                            </button>
+                        </div>
+                        <div fxFlex="2"></div>
                     </div>
-                    <div fxFlex="2"></div>
                 </div>
             </div>
         </div>

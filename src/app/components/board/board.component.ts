@@ -1,5 +1,5 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 // import { BoardModel } from 'src/app/model/board.model';
 import { Card, CardInterface } from 'src/app/model/card.model';
@@ -23,7 +23,7 @@ export class BoardComponent implements OnInit {
   constructor(private storageService: StorageService) { }
 
   ngOnInit(): void {
-    if(!this.storageService.getBoard()) return;
+    if (!this.storageService.getBoard()) return;
     const boards = this.storageService.getBoard();
     for (let i = 0; i < boards.length; i++) {
       if (boards[i].length > 0) {
