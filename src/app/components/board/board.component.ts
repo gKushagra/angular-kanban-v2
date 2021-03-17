@@ -18,10 +18,35 @@ export class BoardComponent implements OnInit {
   completeCards: CardInterface[] = [];
 
   refreshBoards: boolean = false;
+  savingBoards: boolean = false;
 
   constructor(private storageService: StorageService) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    if(!this.storageService.getBoard()) return;
+    const boards = this.storageService.getBoard();
+    for (let i = 0; i < boards.length; i++) {
+      if (boards[i].length > 0) {
+        switch (i) {
+          case 0:
+            this.toDoCards = boards[i];
+            break;
+          case 1:
+            this.inProgressCards = boards[i];
+            break;
+          case 2:
+            this.readyForReviewCards = boards[i];
+            break;
+          case 3:
+            this.completeCards = boards[i];
+            break;
+
+          default:
+            break;
+        }
+      }
+    }
+  }
 
   addNewCard(board: number) {
     this.refreshBoards = true;
@@ -65,12 +90,21 @@ export class BoardComponent implements OnInit {
     this.refreshBoards = false;
   }
 
-  drop(event: CdkDragDrop<CardInterface[]>) {
+  drop(event: CdkDragDrop<any>) {
     if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      // moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
       transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
+      this.saveState(Event);
     }
+  }
+
+  saveState(e: any) {
+    this.savingBoards = true;
+    this.storageService.saveBoard([this.toDoCards, this.inProgressCards, this.readyForReviewCards, this.completeCards]);
+    setTimeout(() => {
+      this.savingBoards = false;
+    }, 2000);
   }
 }
 

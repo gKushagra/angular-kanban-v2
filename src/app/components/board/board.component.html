@@ -1,11 +1,20 @@
 <div fxLayout="column" fxLayoutAlign="start center" style="width: 100%; height: 100%;">
-    <!-- save btn -->
-    <div fxLayout="row" style="width:90%;">
+    <!-- save btn, saving spinner, etc -->
+    <div fxLayout="row" style="width:100%; margin-top: 16px;">
+        <div fxFlex="2"></div>
+        <div class="mat-title">Daily Kanban</div>
         <div fxFlex></div>
-        <div style="margin-top: 16px;">
-            <button color="primary" mat-flat-button>Save</button>
+        <div>
+            <mat-progress-spinner *ngIf="savingBoards" color="primary" diameter="20" mode="indeterminate"></mat-progress-spinner>
         </div>
+        <div fxFlex="1"></div>
+        <div class="mat-body-1" *ngIf="savingBoards">Saving...</div>
+        <!-- <div style="margin-top: 16px;">
+            <button color="primary" mat-flat-button>Save</button>
+        </div> -->
+        <div fxFlex="2"></div>
     </div>
+    <mat-divider style="width:100%;"></mat-divider>
     <div fxLayout="row wrap" cdkDropListGroup style="width: 100%; margin-top: 32px;">
         <!-- to do -->
         <div style="width: 20%; margin: 0 2% 0 2%;">
@@ -21,17 +30,17 @@
                         <div fxLayout="column" style="width: 100%;">
                             <div fxLayout="row" style="width: 100%;">
                                 <mat-form-field appearance="none" fxFlex>
-                                    <input placeholder="Title..." style="font-size: 18px !important;"
+                                    <input (change)="saveState($event)" placeholder="Title..." style="font-size: 18px !important;"
                                         [formControl]="card.header" type="text" matInput />
                                 </mat-form-field>
                                 <div>
-                                    <button matTooltip="Remove" (click)="deleteCard(1,i)" mat-icon-button>
+                                    <button matTooltip="Remove" (click)="deleteCard(1,i);saveState($event);" mat-icon-button>
                                         <mat-icon>remove_circle</mat-icon>
                                     </button>
                                 </div>
                             </div>
                             <mat-form-field appearance="none" style="width: 100%;">
-                                <textarea placeholder="Description..." style="font-size: 16px !important;"
+                                <textarea (change)="saveState($event)" placeholder="Description..." style="font-size: 16px !important;"
                                     [formControl]="card.description" matInput></textarea>
                             </mat-form-field>
                         </div>
@@ -63,17 +72,17 @@
                         <div fxLayout="column" style="width: 100%;">
                             <div fxLayout="row" style="width: 100%;">
                                 <mat-form-field appearance="none" fxFlex>
-                                    <input placeholder="Title..." style="font-size: 18px !important;"
+                                    <input (change)="saveState($event)" placeholder="Title..." style="font-size: 18px !important;"
                                         [formControl]="card.header" type="text" matInput />
                                 </mat-form-field>
                                 <div>
-                                    <button matTooltip="Remove" (click)="deleteCard(2,i)" mat-icon-button>
+                                    <button matTooltip="Remove" (click)="deleteCard(2,i);saveState($event);" mat-icon-button>
                                         <mat-icon>remove_circle</mat-icon>
                                     </button>
                                 </div>
                             </div>
                             <mat-form-field appearance="none" style="width: 100%;">
-                                <textarea placeholder="Description..." style="font-size: 16px !important;"
+                                <textarea (change)="saveState($event)" placeholder="Description..." style="font-size: 16px !important;"
                                     [formControl]="card.description" matInput></textarea>
                             </mat-form-field>
                         </div>
@@ -105,17 +114,17 @@
                         <div fxLayout="column" style="width: 100%;">
                             <div fxLayout="row" style="width: 100%;">
                                 <mat-form-field appearance="none" fxFlex>
-                                    <input placeholder="Title..." style="font-size: 18px !important;"
+                                    <input (change)="saveState($event)" placeholder="Title..." style="font-size: 18px !important;"
                                         [formControl]="card.header" type="text" matInput />
                                 </mat-form-field>
                                 <div>
-                                    <button matTooltip="Remove" (click)="deleteCard(3,i)" mat-icon-button>
+                                    <button matTooltip="Remove" (click)="deleteCard(3,i);saveState($event);" mat-icon-button>
                                         <mat-icon>remove_circle</mat-icon>
                                     </button>
                                 </div>
                             </div>
                             <mat-form-field appearance="none" style="width: 100%;">
-                                <textarea placeholder="Description..." style="font-size: 16px !important;"
+                                <textarea (change)="saveState($event)" placeholder="Description..." style="font-size: 16px !important;"
                                     [formControl]="card.description" matInput></textarea>
                             </mat-form-field>
                         </div>
@@ -146,17 +155,17 @@
                         <div fxLayout="column" style="width: 100%;">
                             <div fxLayout="row" style="width: 100%;">
                                 <mat-form-field appearance="none" fxFlex>
-                                    <input placeholder="Title..." style="font-size: 18px !important;"
+                                    <input (change)="saveState($event)" placeholder="Title..." style="font-size: 18px !important;"
                                         [formControl]="card.header" type="text" matInput />
                                 </mat-form-field>
                                 <div>
-                                    <button matTooltip="Remove" (click)="deleteCard(4,i)" mat-icon-button>
+                                    <button matTooltip="Remove" (click)="deleteCard(4,i);saveState($event);" mat-icon-button>
                                         <mat-icon>remove_circle</mat-icon>
                                     </button>
                                 </div>
                             </div>
                             <mat-form-field appearance="none" style="width: 100%;">
-                                <textarea placeholder="Description..." style="font-size: 16px !important;"
+                                <textarea (change)="saveState($event)" placeholder="Description..." style="font-size: 16px !important;"
                                     [formControl]="card.description" matInput></textarea>
                             </mat-form-field>
                         </div>
